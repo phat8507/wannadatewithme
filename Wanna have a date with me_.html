@@ -1,114 +1,782 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Wanna have a date with me?</title>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#fde4ee;--bg2:#fff1f6;--paper:#fffbfd;--ink:#5a2a3d;--muted:#a77b8c;--pink:#ee6c9c;--deep:#c93d78;--tape:#f8bfd5}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#241019;--bg2:#3a1a2a;--paper:#331827;--ink:#fbe4ee;--muted:#c79ab0;--pink:#f48fb1;--deep:#f06292;--tape:#6b2f48}}
-:root[data-theme="dark"]{--bg:#241019;--bg2:#3a1a2a;--paper:#331827;--ink:#fbe4ee;--muted:#c79ab0;--pink:#f48fb1;--deep:#f06292;--tape:#6b2f48}
-:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-*,*:before,*:after{box-sizing:inherit}
-html,body{height:100%;margin:0}
-body{font-family:'Caveat','Segoe Script','Bradley Hand',cursive;color:var(--ink);background:linear-gradient(125deg,var(--bg),var(--bg2),var(--bg));background-size:300% 300%;animation:drift 24s ease-in-out infinite;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
-@keyframes drift{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}
-.blob{position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none;z-index:0;background:var(--pink)}
-.b1{width:46vmax;height:46vmax;opacity:.2;top:-18vmax;right:-12vmax;animation:f1 18s ease-in-out infinite alternate}
-.b2{width:40vmax;height:40vmax;opacity:.16;bottom:-16vmax;left:-12vmax;animation:f2 22s ease-in-out infinite alternate}
-@keyframes f1{to{transform:translate(-10vmax,10vmax) scale(1.12)}}
-@keyframes f2{to{transform:translate(10vmax,-8vmax) scale(1.1)}}
-.paper{position:relative;z-index:2;width:min(90vw,400px);background:var(--paper);border-radius:6px;padding:30px 28px 38px;text-align:center;transform:rotate(-1.6deg);box-shadow:0 1px 2px rgba(120,40,80,.12),0 24px 48px -12px rgba(201,61,120,.28)}
-.tape{position:absolute;top:-14px;left:50%;width:96px;height:28px;margin-left:-48px;background:var(--tape);opacity:.85;transform:rotate(3deg)}
-.bouquet{width:190px;height:116px;display:block;margin:0 auto 8px;overflow:visible}
-.stem{fill:none;stroke:var(--deep);stroke-width:2;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;animation:grow 1.6s ease-out .2s forwards}
-@keyframes grow{to{stroke-dashoffset:0}}
-.pt{fill:var(--pink);fill-opacity:.85}
-.ct{fill:var(--deep)}
-.bloom{transform-box:fill-box;transform-origin:center;transform:scale(0);animation:pop .9s cubic-bezier(.3,1.4,.5,1) forwards}
-@keyframes pop{to{transform:scale(1)}}
-h1{font-size:clamp(42px,12vw,58px);font-weight:700;line-height:1;margin:6px 0 10px;color:var(--deep)}
-.line{display:block;width:150px;height:10px;margin:0 auto 16px}
-.line path{fill:none;stroke:var(--pink);stroke-width:3;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;animation:grow 1s ease-out 1.4s forwards}
-p{margin:0 0 30px;font-size:27px;line-height:1.2;color:var(--muted)}
-.btns{display:flex;gap:26px;justify-content:center;align-items:center;min-height:56px}
-button{font:600 26px 'Caveat','Segoe Script',cursive;cursor:pointer;background:none;border:0;color:inherit}
-#yes{background:var(--deep);color:#fff;padding:8px 38px 10px;border-radius:999px;transition:transform .2s}
-#yes:hover{transform:scale(1.07) rotate(-2deg)}
-#yes:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
-#no{color:var(--muted);text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:5px;padding:8px 10px;transition:left .25s ease,top .25s ease}
-#msg{margin-top:14px;min-height:30px;font-size:23px;color:var(--muted)}
-.win{display:none}.win.show{display:block}
-.petal{position:absolute;z-index:1;pointer-events:none;width:14px;height:14px;border-radius:100% 0 100% 0;background:var(--pink);opacity:.75;top:0;animation:fall linear forwards}
-@keyframes fall{from{transform:translateY(-10vh) rotate(0)}to{transform:translateY(112vh) rotate(380deg)}}
-@media (prefers-reduced-motion:reduce){body,.blob{animation:none}.petal{display:none}.stem,.line path{animation:none;stroke-dashoffset:0}.bloom{animation:none;transform:none}}
-</style>
-</head>
-<body>
-<div class="blob b1"></div><div class="blob b2"></div>
-
-<main class="paper">
-  <div class="tape"></div>
-  <svg class="bouquet" viewBox="0 0 190 116" aria-hidden="true">
-    <defs>
-      <path id="pt" class="pt" d="M0 0C-8-10-8-22 0-26C8-22 8-10 0 0Z"/>
-      <g id="fl"><use href="#pt"/><use href="#pt" transform="rotate(72)"/><use href="#pt" transform="rotate(144)"/><use href="#pt" transform="rotate(216)"/><use href="#pt" transform="rotate(288)"/><circle class="ct" r="4"/></g>
-    </defs>
-    <path class="stem" pathLength="1" d="M95 116C95 90 92 70 95 46"/>
-    <path class="stem" pathLength="1" d="M95 116C90 98 66 86 50 66"/>
-    <path class="stem" pathLength="1" d="M95 116C102 98 128 88 142 70"/>
-    <g transform="translate(142 62) scale(.8)"><use class="bloom" href="#fl" style="animation-delay:1.1s"/></g>
-    <g transform="translate(50 58) scale(.85)"><use class="bloom" href="#fl" style="animation-delay:.95s"/></g>
-    <g transform="translate(95 34) scale(1.1)"><use class="bloom" href="#fl" style="animation-delay:.8s"/></g>
-  </svg>
-
-  <div id="ask">
-    <h1>Wanna have a date with me?</h1>
-    <svg class="line" viewBox="0 0 150 10" aria-hidden="true"><path pathLength="1" d="M3 6C30 1 60 9 90 4S130 3 147 5"/></svg>
-    <p>I saved the evening for you.</p>
-    <div class="btns" id="btns">
-      <button id="yes">Yes</button>
-      <button id="no">no</button>
-    </div>
-    <div id="msg" aria-live="polite"></div>
-  </div>
-  <div id="win" class="win">
-    <h1>It's a date.</h1>
-    <svg class="line" viewBox="0 0 150 10" aria-hidden="true"><path pathLength="1" d="M3 6C30 1 60 9 90 4S130 3 147 5" style="animation:none;stroke-dashoffset:0"/></svg>
-    <p>I'll plan everything. See you soon.</p>
-  </div>
-</main>
-
-<script>
-(function(){
-  var no=document.getElementById('no'),msg=document.getElementById('msg');
-  var lines=['Nice try.','That one is shy.','Not that button.','So close.','Yes is right there.','You can\'t catch it.'];
-  var n=0,moved=false;
-  function dodge(e){
-    if(e&&e.preventDefault)e.preventDefault();
-    if(!moved){moved=true;document.body.appendChild(no);no.style.position='fixed';}
-    var m=16,w=no.offsetWidth,h=no.offsetHeight;
-    no.style.left=(m+Math.random()*(window.innerWidth-w-2*m))+'px';
-    no.style.top=(m+Math.random()*(window.innerHeight-h-2*m))+'px';
-    no.style.zIndex=5;
-    msg.textContent=lines[n++%lines.length];
-  }
-  ['mouseenter','touchstart','pointerdown','click','focus'].forEach(function(ev){no.addEventListener(ev,dodge,{passive:false})});
-  document.getElementById('yes').addEventListener('click',function(){
-    document.getElementById('ask').style.display='none';
-    document.getElementById('win').classList.add('show');
-    no.style.display='none';
-    for(var i=0;i<26;i++){
-      var s=document.createElement('span');
-      s.className='petal';
-      s.style.left=Math.random()*100+'vw';
-      s.style.animationDelay=(Math.random()*3)+'s';
-      s.style.animationDuration=(5+Math.random()*4)+'s';
-      document.body.appendChild(s);
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>16/10/2026 — A Date Invitation 🌸</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pink-bg: #fcf7f9;
+      --pink-surface: #ffffff;
+      --pink-border: #f3dce4;
+      --pink-accent: #e05385;
+      --pink-accent-dark: #c93b6d;
+      --pink-muted: #9e6b7e;
+      --pink-ink: #3d222c;
     }
-  });
-})();
-</script>
+    * {
+      box-sizing: border-box;
+      user-select: none;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--pink-bg);
+      min-height: 100vh;
+      overflow-x: hidden;
+      margin: 0;
+      color: var(--pink-ink);
+      -webkit-font-smoothing: antialiased;
+    }
+    .script-font {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+    }
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-5px); }
+    }
+    @keyframes swayFlower {
+      0%, 100% { transform: rotate(-2deg); }
+      50% { transform: rotate(2deg); }
+    }
+    @keyframes popIn {
+      0% { opacity: 0; transform: translateY(8px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .animate-float {
+      animation: floatSlow 5s ease-in-out infinite;
+    }
+    .animate-sway {
+      animation: swayFlower 4.5s ease-in-out infinite;
+    }
+    .animate-pop {
+      animation: popIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--pink-border);
+      box-shadow: 0 16px 40px -16px rgba(214, 90, 138, 0.12);
+    }
+    .btn-yes {
+      background-color: var(--pink-accent);
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 6px 20px -4px rgba(224, 83, 133, 0.35);
+    }
+    .btn-yes:hover {
+      background-color: var(--pink-accent-dark);
+      box-shadow: 0 8px 24px -4px rgba(201, 59, 109, 0.45);
+    }
+    .btn-no {
+      transition: left 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), top 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.2s ease;
+    }
+    #petalCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .flower-corner {
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="relative flex flex-col justify-between min-h-screen p-4 sm:p-8">
+
+  <!-- Minimalist Falling Petals Canvas -->
+  <canvas id="petalCanvas"></canvas>
+
+  <!-- Minimalist Top Navigation -->
+  <header class="relative z-20 max-w-xl w-full mx-auto flex items-center justify-between gap-2 px-4 py-2.5 rounded-full bg-white/80 backdrop-blur-sm border border-[#f3dce4]">
+    <div class="flex items-center gap-2">
+      <span class="inline-block w-2 h-2 rounded-full bg-[#e05385]"></span>
+      <span class="text-xs font-medium tracking-widest uppercase text-[#8c586c]">16 / 10 / 2026 • Date Invite</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <button id="toggleCustomizeBtn" type="button" class="text-xs font-medium px-3 py-1 rounded-full text-[#7a495b] hover:bg-[#fdf2f6] focus:outline-none transition flex items-center gap-1.5">
+        <span>Personalize</span>
+      </button>
+      <button id="soundToggleBtn" type="button" class="text-xs font-medium px-3 py-1 rounded-full text-[#7a495b] hover:bg-[#fdf2f6] focus:outline-none transition flex items-center gap-1" title="Toggle sound">
+        <span id="soundIcon">🔊</span> <span class="hidden sm:inline" id="soundLabel">Sound</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Optional Customize Drawer -->
+  <section id="customizePanel" class="hidden relative z-30 max-w-xl w-full mx-auto mt-3 glass-card rounded-2xl p-5 animate-pop">
+    <div class="flex items-center justify-between mb-3">
+      <h2 class="text-xs font-semibold uppercase tracking-widest text-[#8c586c]">Personalize Nickname</h2>
+      <button id="closeCustomizeBtn" type="button" class="text-xs px-2.5 py-1 rounded-full text-[#8c586c] hover:bg-[#fdf2f6] focus:outline-none">Close ✕</button>
+    </div>
+    <div class="text-left">
+      <label for="partnerNameInput" class="block text-xs text-[#8c586c] mb-1">Nickname</label>
+      <input id="partnerNameInput" type="text" value="my babyy" maxlength="30" class="w-full px-3 py-2 rounded-lg border border-[#f0d5df] bg-white text-sm text-[#3d222c] focus:outline-none focus:border-[#e05385]" placeholder="e.g. my babyy..." />
+    </div>
+  </section>
+
+  <!-- Main Center Stage -->
+  <main class="relative z-10 flex-1 flex items-center justify-center my-4">
+    <div id="mainCard" class="glass-card relative w-full max-w-xl rounded-3xl p-7 sm:p-11 text-center overflow-hidden">
+
+      <!-- Subtle Minimalist Line-Art Corner Flowers -->
+      <svg class="flower-corner absolute top-4 left-4 w-16 h-16 opacity-60 animate-sway" viewBox="0 0 80 80" fill="none">
+        <circle cx="26" cy="26" r="14" stroke="#f0c4d4" stroke-width="1" />
+        <path d="M26 10 C30 18, 30 22, 26 26 C22 22, 22 18, 26 10 Z" fill="#f9dce6" stroke="#e05385" stroke-width="1"/>
+        <path d="M26 42 C30 34, 30 30, 26 26 C22 30, 22 34, 26 42 Z" fill="#f9dce6" stroke="#e05385" stroke-width="1"/>
+        <path d="M10 26 C18 22, 22 22, 26 26 C22 30, 18 30, 10 26 Z" fill="#f9dce6" stroke="#e05385" stroke-width="1"/>
+        <path d="M42 26 C34 22, 30 22, 26 26 C30 30, 34 30, 42 26 Z" fill="#f9dce6" stroke="#e05385" stroke-width="1"/>
+        <circle cx="26" cy="26" r="2.5" fill="#e05385" />
+      </svg>
+
+      <svg class="flower-corner absolute bottom-4 right-4 w-16 h-16 opacity-60 animate-sway" style="animation-delay: -2s;" viewBox="0 0 80 80" fill="none">
+        <path d="M54 38 C58 46, 58 50, 54 54 C50 50, 50 46, 54 38 Z" fill="#f9dce6" stroke="#e05385" stroke-width="1"/>
+        <path d="M54 70 C58 62, 58 58, 54 54 C50 58, 50 62, 54 70 Z" fill="#f9dce6" stroke="#e05385" stroke-width="1"/>
+        <path d="M38 54 C46 50, 50 50, 54 54 C50 58, 46 58, 38 54 Z" fill="#f9dce6" stroke="#e05385" stroke-width="1"/>
+        <path d="M70 54 C62 50, 58 50, 54 54 C58 58, 62 58, 70 54 Z" fill="#f9dce6" stroke="#e05385" stroke-width="1"/>
+        <circle cx="54" cy="54" r="2.5" fill="#e05385" />
+      </svg>
+
+      <!-- STEP 1: INVITATION VIEW -->
+      <div id="inviteView" class="relative z-10">
+        <!-- Minimalist Pill Tag -->
+        <div class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#fdf2f6] border border-[#f5dce5] text-[#8c586c] text-[11px] tracking-widest uppercase mb-5">
+          <span>16/10/2026 • For <strong id="badgePartnerName" class="font-semibold text-[#e05385]">my babyy</strong></span>
+        </div>
+
+        <!-- Minimalist Botanical Floral Illustration -->
+        <div class="relative mx-auto w-32 h-32 sm:w-36 sm:h-36 flex items-center justify-center mb-4 animate-float">
+          <svg viewBox="0 0 160 160" class="w-full h-full" fill="none">
+            <circle cx="80" cy="80" r="56" fill="#fdf2f6" />
+            <circle cx="80" cy="80" r="56" stroke="#f5dce5" stroke-width="1" stroke-dasharray="3 3" />
+
+            <!-- Minimalist Stems -->
+            <path d="M80 72 L80 132" stroke="#8c586c" stroke-width="1.5" stroke-linecap="round" />
+            <path d="M80 112 Q62 96 58 76" stroke="#8c586c" stroke-width="1.3" stroke-linecap="round" fill="none" />
+            <path d="M80 106 Q98 92 102 74" stroke="#8c586c" stroke-width="1.3" stroke-linecap="round" fill="none" />
+
+            <!-- Minimalist Leaves -->
+            <path d="M80 102 C68 98, 64 90, 74 88 C78 90, 80 96, 80 102 Z" fill="#f9dce6" stroke="#8c586c" stroke-width="1.2" />
+            <path d="M80 96 C92 92, 96 84, 86 82 C82 84, 80 90, 80 96 Z" fill="#f9dce6" stroke="#8c586c" stroke-width="1.2" />
+
+            <!-- Left Bud -->
+            <g transform="translate(46, 56)">
+              <path d="M12 22 C4 18, 4 6, 12 2 C20 6, 20 18, 12 22 Z" fill="#f7cad8" stroke="#e05385" stroke-width="1.3" />
+              <path d="M12 22 C6 14, 10 6, 18 6" stroke="#e05385" stroke-width="1.1" fill="none" />
+            </g>
+
+            <!-- Right Bud -->
+            <g transform="translate(90, 54)">
+              <path d="M12 22 C4 18, 4 6, 12 2 C20 6, 20 18, 12 22 Z" fill="#f7cad8" stroke="#e05385" stroke-width="1.3" />
+              <path d="M12 22 C18 14, 14 6, 6 6" stroke="#e05385" stroke-width="1.1" fill="none" />
+            </g>
+
+            <!-- Center Blooming Minimalist Flower -->
+            <g transform="translate(80, 56)">
+              <ellipse cx="0" cy="-14" rx="8" ry="13" fill="#fadce6" stroke="#e05385" stroke-width="1.3" />
+              <ellipse cx="0" cy="14" rx="8" ry="13" fill="#fadce6" stroke="#e05385" stroke-width="1.3" />
+              <ellipse cx="-14" cy="0" rx="13" ry="8" fill="#fadce6" stroke="#e05385" stroke-width="1.3" />
+              <ellipse cx="14" cy="0" rx="13" ry="8" fill="#fadce6" stroke="#e05385" stroke-width="1.3" />
+              <ellipse cx="-10" cy="-10" rx="9" ry="9" fill="#f5b8cd" stroke="#e05385" stroke-width="1.2" />
+              <ellipse cx="10" cy="10" rx="9" ry="9" fill="#f5b8cd" stroke="#e05385" stroke-width="1.2" />
+              <ellipse cx="10" cy="-10" rx="9" ry="9" fill="#f5b8cd" stroke="#e05385" stroke-width="1.2" />
+              <ellipse cx="-10" cy="10" rx="9" ry="9" fill="#f5b8cd" stroke="#e05385" stroke-width="1.2" />
+              <circle cx="0" cy="0" r="6" fill="#e05385" />
+              <circle cx="0" cy="0" r="2.5" fill="#fff5f8" />
+            </g>
+
+            <!-- Minimalist Ribbon Knot -->
+            <path d="M73 118 Q80 115 87 118" stroke="#e05385" stroke-width="2" stroke-linecap="round" />
+            <defs>
+              <radialGradient id="pinkGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#f7cad8" stop-opacity="0.35" />
+                <stop offset="100%" stop-color="#fdf2f6" stop-opacity="0" />
+              </radialGradient>
+            </defs>
+          </svg>
+        </div>
+
+        <!-- Editorial Minimalist Headline -->
+        <h1 class="script-font text-3xl sm:text-5xl font-medium text-[#3d222c] tracking-tight leading-tight mb-3">
+          Would you go on a date with me, <span id="headlinePartnerName" class="italic text-[#e05385]">my babyy</span>?
+        </h1>
+        <p id="subMessageText" class="text-sm text-[#7a495b] max-w-md mx-auto font-light leading-relaxed mb-6">
+          Save the date for <strong class="font-medium text-[#e05385]">16/10/2026</strong> — black &amp; white photobooth, an escape room game (or any game you like), and then we talk.
+        </p>
+
+        <!-- Subtle Status Line -->
+        <div id="dodgeStatusBox" class="min-h-[32px] flex items-center justify-center mb-4">
+          <span id="dodgeStatusText" class="text-xs text-[#9e6b7e] tracking-wide transition-all">
+            Choose honestly — though saying no isn't an option.
+          </span>
+        </div>
+
+        <!-- Button Arena -->
+        <div id="buttonArena" class="relative w-full min-h-[148px] rounded-2xl bg-[#fdf7f9] border border-[#f5dfe7] flex items-center justify-center p-4 overflow-hidden">
+          <div class="flex flex-wrap items-center justify-center gap-4 z-10">
+            <!-- YES BUTTON -->
+            <button
+              id="yesBtn"
+              type="button"
+              class="btn-yes text-white font-medium text-sm sm:text-base px-7 py-3 rounded-full flex items-center gap-2 cursor-pointer focus:outline-none active:scale-95"
+            >
+              <span id="yesBtnText">Yes, I'd love to</span>
+              <span>♡</span>
+            </button>
+
+            <!-- NO BUTTON (Unclickable / Dodges on hover, touch, focus, or click) -->
+            <button
+              id="noBtn"
+              type="button"
+              tabindex="-1"
+              class="btn-no bg-white text-[#8c586c] border border-[#ebd0da] font-normal text-sm px-5 py-3 rounded-full flex items-center gap-1.5 select-none focus:outline-none"
+            >
+              <span id="noBtnEmoji">🌸</span>
+              <span id="noBtnText">No, thanks</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Minimalist Metrics Footer -->
+        <div class="mt-4 flex items-center justify-center gap-4 text-[11px] uppercase tracking-widest text-[#a67688]">
+          <span>"No" attempts: <strong id="dodgeCountBadge" class="text-[#e05385] font-semibold">0</strong></span>
+          <span>•</span>
+          <span>Date: <strong class="text-[#e05385] font-semibold">16/10/2026</strong></span>
+        </div>
+      </div>
+
+      <!-- STEP 2: ACCEPTED / DATE PLANNER VIEW -->
+      <div id="acceptedView" class="hidden relative z-10 animate-pop">
+        <div class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#fdf2f6] border border-[#f5dce5] text-[#e05385] text-[11px] tracking-widest uppercase mb-3">
+          It's a Date • 16/10/2026
+        </div>
+
+        <h2 class="script-font text-3xl sm:text-5xl font-medium text-[#3d222c] mb-2">
+          See you on 16/10, <span id="acceptedPartnerName" class="italic text-[#e05385]">my babyy</span>.
+        </h2>
+        <p class="text-sm text-[#7a495b] font-light max-w-md mx-auto mb-6">
+          Here is our lineup for <strong class="font-medium text-[#3d222c]">16/10/2026</strong> — three simple things, just the two of us.
+        </p>
+
+        <!-- Minimalist 3-Step Date Itinerary -->
+        <div class="text-left mb-5">
+          <div class="flex items-center justify-between mb-2">
+            <label class="block text-[11px] font-medium uppercase tracking-widest text-[#9e6b7e]">01 / Date Activities (16/10/2026)</label>
+            <span class="text-[11px] text-[#e05385] font-medium">3-Step Itinerary</span>
+          </div>
+          <div id="activityGrid" class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+            <button type="button" data-activity="Black & White Photobooth → Escape Room / Any Game → Then We Talk" class="activity-btn p-3.5 rounded-xl border border-[#e05385] bg-[#fdf2f6] text-left transition flex flex-col justify-between gap-2 focus:outline-none">
+              <div class="flex items-center justify-between w-full">
+                <span class="text-[10px] font-semibold uppercase tracking-widest text-[#e05385]">Step 01</span>
+                <span class="text-base">📸</span>
+              </div>
+              <div>
+                <div class="text-xs sm:text-sm font-medium text-[#3d222c] leading-snug">Black &amp; White Photobooth</div>
+                <div class="text-[11px] text-[#8c586c] font-light mt-0.5">Classic monochrome strips together</div>
+              </div>
+            </button>
+
+            <button type="button" data-activity="Escape Room Game / Any Game (after B&W Photobooth, then we talk)" class="activity-btn p-3.5 rounded-xl border border-[#e05385] bg-[#fdf2f6] text-left transition flex flex-col justify-between gap-2 focus:outline-none">
+              <div class="flex items-center justify-between w-full">
+                <span class="text-[10px] font-semibold uppercase tracking-widest text-[#e05385]">Step 02</span>
+                <span class="text-base">🧩</span>
+              </div>
+              <div>
+                <div class="text-xs sm:text-sm font-medium text-[#3d222c] leading-snug">Escape Room Game / Any Game</div>
+                <div class="text-[11px] text-[#8c586c] font-light mt-0.5">Team up, solve clues &amp; play</div>
+              </div>
+            </button>
+
+            <button type="button" data-activity="Then We Talk (after Photobooth & Escape Room / Game)" class="activity-btn p-3.5 rounded-xl border border-[#e05385] bg-[#fdf2f6] text-left transition flex flex-col justify-between gap-2 focus:outline-none">
+              <div class="flex items-center justify-between w-full">
+                <span class="text-[10px] font-semibold uppercase tracking-widest text-[#e05385]">Step 03</span>
+                <span class="text-base">💬</span>
+              </div>
+              <div>
+                <div class="text-xs sm:text-sm font-medium text-[#3d222c] leading-snug">Then We Talk</div>
+                <div class="text-[11px] text-[#8c586c] font-light mt-0.5">Unwind, chill &amp; talk for hours</div>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Date & Time Selection -->
+        <div class="text-left mb-6">
+          <label for="timeSelect" class="block text-[11px] font-medium uppercase tracking-widest text-[#9e6b7e] mb-1.5">02 / Date &amp; Time</label>
+          <select id="timeSelect" class="w-full px-3 py-2.5 rounded-xl border border-[#f0d5df] bg-white text-xs sm:text-sm text-[#3d222c] focus:outline-none focus:border-[#e05385]">
+            <option value="16/10/2026">16/10/2026</option>
+            <option value="16/10/2026 • Afternoon">16/10/2026 • Afternoon</option>
+            <option value="16/10/2026 • Evening">16/10/2026 • Evening</option>
+            <option value="16/10/2026 • All Day">16/10/2026 • All Day</option>
+          </select>
+        </div>
+
+        <!-- Minimalist Editorial Date Pass -->
+        <div class="rounded-2xl bg-[#fdf7f9] border border-[#f2dce4] p-5 text-left mb-6">
+          <div class="flex items-center justify-between border-b border-[#f2dce4] pb-2.5 mb-3">
+            <span class="text-[11px] font-semibold uppercase tracking-widest text-[#e05385]">Official Date Pass</span>
+            <span class="text-[11px] tracking-widest text-[#9e6b7e]">16 / 10 / 2026</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-12 gap-y-2 text-xs sm:text-sm text-[#3d222c]">
+            <div class="sm:col-span-4 text-[#8c586c] font-light">Date</div>
+            <div id="ticketTime" class="sm:col-span-8 font-medium sm:text-right">16/10/2026</div>
+
+            <div class="sm:col-span-4 text-[#8c586c] font-light">Activities</div>
+            <div id="ticketActivity" class="sm:col-span-8 font-medium sm:text-right">Black &amp; White Photobooth → Escape Room / Any Game → Then We Talk</div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-wrap items-center justify-center gap-3">
+          <button id="copyTicketBtn" type="button" class="btn-yes text-white font-medium text-xs sm:text-sm px-6 py-3 rounded-full flex items-center gap-2 focus:outline-none">
+            <span id="copyBtnLabel">Copy Date Pass</span>
+          </button>
+          <button id="burstFlowerBtn" type="button" class="px-4 py-3 rounded-full bg-[#fdf2f6] hover:bg-[#fae6ee] text-[#7a495b] font-medium text-xs sm:text-sm transition focus:outline-none">
+            🌸 Shower Petals
+          </button>
+          <button id="resetBtn" type="button" class="px-4 py-3 rounded-full bg-white hover:bg-[#fdf7f9] border border-[#f0d5df] text-[#8c586c] font-normal text-xs sm:text-sm transition focus:outline-none">
+            Start Over
+          </button>
+        </div>
+
+        <!-- Toast notification inside card -->
+        <div id="copyToast" class="hidden mt-3 text-xs text-[#e05385] bg-[#fdf2f6] border border-[#f5dce5] px-3.5 py-1.5 rounded-full inline-block">
+          Copied to clipboard — send it over to lock in our 16/10/2026 date.
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Minimalist Footer -->
+  <footer class="relative z-10 text-center text-[11px] tracking-widest uppercase text-[#a67688] py-1">
+    16/10/2026 • Black &amp; White Photobooth • Escape Room / Any Game • Then We Talk
+  </footer>
+
+  <script>
+    (function () {
+      // --- State ---
+      let dodgeCount = 0;
+      let yesScale = 1;
+      let soundEnabled = true;
+      let audioCtx = null;
+      const defaultItinerary = 'Black & White Photobooth → Escape Room / Any Game → Then We Talk';
+      let selectedActivity = defaultItinerary;
+
+      const funnyNoPhrases = [
+        { emoji: '🌸', text: 'Nice try', status: 'The "No" button politely stepped aside.' },
+        { emoji: '✨', text: 'Not an option', status: '16/10/2026 is already reserved for us.' },
+        { emoji: '🌷', text: 'Missed me', status: 'Even the flowers are rooting for "Yes".' },
+        { emoji: '💌', text: 'Still no luck', status: 'Only the pink button is accepting clicks.' },
+        { emoji: '🦋', text: 'Too slow', status: 'Notice how "Yes" is getting harder to resist?' },
+        { emoji: '🙈', text: 'Out of bounds', status: 'Saying no is officially out of service.' },
+        { emoji: '♡', text: 'Say yes instead', status: 'Photobooth + Escape Room + Deep talks await!' }
+      ];
+
+      // --- DOM Elements ---
+      const inviteView = document.getElementById('inviteView');
+      const acceptedView = document.getElementById('acceptedView');
+      const yesBtn = document.getElementById('yesBtn');
+      const yesBtnText = document.getElementById('yesBtnText');
+      const noBtn = document.getElementById('noBtn');
+      const noBtnEmoji = document.getElementById('noBtnEmoji');
+      const noBtnText = document.getElementById('noBtnText');
+      const buttonArena = document.getElementById('buttonArena');
+      const dodgeStatusText = document.getElementById('dodgeStatusText');
+      const dodgeCountBadge = document.getElementById('dodgeCountBadge');
+
+      const toggleCustomizeBtn = document.getElementById('toggleCustomizeBtn');
+      const closeCustomizeBtn = document.getElementById('closeCustomizeBtn');
+      const customizePanel = document.getElementById('customizePanel');
+      const partnerNameInput = document.getElementById('partnerNameInput');
+      const badgePartnerName = document.getElementById('badgePartnerName');
+      const headlinePartnerName = document.getElementById('headlinePartnerName');
+      const acceptedPartnerName = document.getElementById('acceptedPartnerName');
+
+      const soundToggleBtn = document.getElementById('soundToggleBtn');
+      const soundIcon = document.getElementById('soundIcon');
+      const soundLabel = document.getElementById('soundLabel');
+
+      const activityBtns = document.querySelectorAll('.activity-btn');
+      const timeSelect = document.getElementById('timeSelect');
+      const ticketActivity = document.getElementById('ticketActivity');
+      const ticketTime = document.getElementById('ticketTime');
+      const copyTicketBtn = document.getElementById('copyTicketBtn');
+      const copyBtnLabel = document.getElementById('copyBtnLabel');
+      const copyToast = document.getElementById('copyToast');
+      const burstFlowerBtn = document.getElementById('burstFlowerBtn');
+      const resetBtn = document.getElementById('resetBtn');
+
+      // --- Web Audio Synthesized Sound Effects ---
+      function ensureAudio() {
+        if (!soundEnabled) return null;
+        if (!audioCtx) {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          if (AudioContextClass) {
+            audioCtx = new AudioContextClass();
+          }
+        }
+        if (audioCtx && audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        return audioCtx;
+      }
+
+      function playBoingSound() {
+        const ctx = ensureAudio();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(380, now);
+        osc.frequency.exponentialRampToValueAtTime(620, now + 0.09);
+        gain.gain.setValueAtTime(0.08, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.11);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.12);
+      }
+
+      function playRomanticChime() {
+        const ctx = ensureAudio();
+        if (!ctx) return;
+        const notes = [523.25, 659.25, 783.99, 1046.5];
+        notes.forEach((freq, idx) => {
+          const now = ctx.currentTime + idx * 0.09;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, now);
+          gain.gain.setValueAtTime(0.11, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.46);
+        });
+      }
+
+      // --- Dodge Logic for NO Button ---
+      function dodgeNoButton(evt) {
+        if (evt) {
+          evt.preventDefault();
+          evt.stopPropagation();
+        }
+
+        dodgeCount++;
+        dodgeCountBadge.textContent = String(dodgeCount);
+        playBoingSound();
+
+        const item = funnyNoPhrases[(dodgeCount - 1) % funnyNoPhrases.length];
+        noBtnEmoji.textContent = item.emoji;
+        noBtnText.textContent = item.text;
+        dodgeStatusText.textContent = item.status;
+
+        yesScale = Math.min(1.28, 1 + dodgeCount * 0.045);
+        yesBtn.style.transform = `scale(${yesScale.toFixed(2)})`;
+        if (dodgeCount >= 3) {
+          yesBtnText.textContent = 'Just say Yes';
+        }
+        if (dodgeCount >= 6) {
+          yesBtnText.textContent = 'Definitely Yes';
+        }
+
+        const arenaRect = buttonArena.getBoundingClientRect();
+        const btnRect = noBtn.getBoundingClientRect();
+        const yesRect = yesBtn.getBoundingClientRect();
+
+        noBtn.style.position = 'absolute';
+
+        const pad = 10;
+        const maxLeft = Math.max(pad, arenaRect.width - btnRect.width - pad);
+        const maxTop = Math.max(pad, arenaRect.height - btnRect.height - pad);
+
+        let bestLeft = pad;
+        let bestTop = pad;
+        let maxDist = -1;
+
+        const yesCenterX = (yesRect.left - arenaRect.left) + yesRect.width / 2;
+        const yesCenterY = (yesRect.top - arenaRect.top) + yesRect.height / 2;
+
+        for (let i = 0; i < 8; i++) {
+          const candLeft = pad + Math.random() * Math.max(1, maxLeft - pad);
+          const candTop = pad + Math.random() * Math.max(1, maxTop - pad);
+          const candCenterX = candLeft + btnRect.width / 2;
+          const candCenterY = candTop + btnRect.height / 2;
+
+          const distFromYes = Math.hypot(candCenterX - yesCenterX, candCenterY - yesCenterY);
+          if (distFromYes > maxDist) {
+            maxDist = distFromYes;
+            bestLeft = candLeft;
+            bestTop = candTop;
+          }
+        }
+
+        noBtn.style.left = `${Math.round(bestLeft)}px`;
+        noBtn.style.top = `${Math.round(bestTop)}px`;
+      }
+
+      noBtn.addEventListener('mouseenter', dodgeNoButton);
+      noBtn.addEventListener('pointerdown', dodgeNoButton);
+      noBtn.addEventListener('touchstart', dodgeNoButton, { passive: false });
+      noBtn.addEventListener('click', dodgeNoButton);
+      noBtn.addEventListener('focus', function () {
+        noBtn.blur();
+        dodgeNoButton();
+      });
+
+      // --- Update Ticket Info ---
+      function syncNamesAndTicket() {
+        const partner = (partnerNameInput.value || 'my babyy').trim();
+        badgePartnerName.textContent = partner;
+        headlinePartnerName.textContent = partner;
+        acceptedPartnerName.textContent = partner;
+        ticketActivity.textContent = selectedActivity;
+        ticketTime.textContent = timeSelect.value;
+      }
+
+      partnerNameInput.addEventListener('input', syncNamesAndTicket);
+      timeSelect.addEventListener('change', syncNamesAndTicket);
+
+      // --- Activity Selection ---
+      activityBtns.forEach((btn) => {
+        btn.addEventListener('click', function () {
+          selectedActivity = btn.getAttribute('data-activity') || defaultItinerary;
+          activityBtns.forEach((b) => {
+            b.className = 'activity-btn p-3.5 rounded-xl border border-[#f2dce4] bg-white hover:bg-[#fdf7f9] text-left transition flex flex-col justify-between gap-2 focus:outline-none';
+          });
+          btn.className = 'activity-btn p-3.5 rounded-xl border border-[#e05385] bg-[#fdf2f6] text-left transition flex flex-col justify-between gap-2 focus:outline-none';
+          syncNamesAndTicket();
+        });
+      });
+
+      // --- YES Button Click ---
+      yesBtn.addEventListener('click', function () {
+        playRomanticChime();
+        selectedActivity = defaultItinerary;
+        activityBtns.forEach((b) => {
+          b.className = 'activity-btn p-3.5 rounded-xl border border-[#e05385] bg-[#fdf2f6] text-left transition flex flex-col justify-between gap-2 focus:outline-none';
+        });
+        syncNamesAndTicket();
+        inviteView.classList.add('hidden');
+        acceptedView.classList.remove('hidden');
+        spawnCelebrationBurst(40);
+      });
+
+      // --- Copy Ticket Button ---
+      copyTicketBtn.addEventListener('click', function () {
+        const partner = (partnerNameInput.value || 'my babyy').trim();
+        const ticketText = [
+          `🌸 OFFICIAL DATE PASS — 16/10/2026`,
+          `For: ${partner}`,
+          `Date: ${timeSelect.value}`,
+          `Activities: Black & White Photobooth → Escape Room Game / Any Game → Then We Talk`,
+          `See you on 16/10/2026! ♡`
+        ].join('\n');
+
+        const showCopiedFeedback = () => {
+          copyToast.classList.remove('hidden');
+          copyBtnLabel.textContent = 'Copied!';
+          spawnCelebrationBurst(20);
+          setTimeout(() => {
+            copyBtnLabel.textContent = 'Copy Date Pass';
+          }, 2600);
+        };
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(ticketText).then(showCopiedFeedback).catch(() => {
+            fallbackCopy(ticketText);
+            showCopiedFeedback();
+          });
+        } else {
+          fallbackCopy(ticketText);
+          showCopiedFeedback();
+        }
+      });
+
+      function fallbackCopy(text) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+          document.execCommand('copy');
+        } catch (err) {
+          // ignore
+        }
+        document.body.removeChild(ta);
+      }
+
+      // --- Burst More Flowers Button ---
+      burstFlowerBtn.addEventListener('click', function () {
+        playRomanticChime();
+        spawnCelebrationBurst(35);
+      });
+
+      // --- Reset Button ---
+      resetBtn.addEventListener('click', function () {
+        dodgeCount = 0;
+        yesScale = 1;
+        selectedActivity = defaultItinerary;
+        dodgeCountBadge.textContent = '0';
+        yesBtn.style.transform = 'scale(1)';
+        yesBtnText.textContent = "Yes, I'd love to";
+        noBtn.style.position = 'static';
+        noBtnEmoji.textContent = '🌸';
+        noBtnText.textContent = 'No, thanks';
+        dodgeStatusText.textContent = "Choose honestly — though saying no isn't an option.";
+        copyToast.classList.add('hidden');
+        acceptedView.classList.add('hidden');
+        inviteView.classList.remove('hidden');
+      });
+
+      // --- Customize Toggle & Sound Toggle ---
+      toggleCustomizeBtn.addEventListener('click', function () {
+        customizePanel.classList.toggle('hidden');
+      });
+      closeCustomizeBtn.addEventListener('click', function () {
+        customizePanel.classList.add('hidden');
+      });
+      soundToggleBtn.addEventListener('click', function () {
+        soundEnabled = !soundEnabled;
+        soundIcon.textContent = soundEnabled ? '🔊' : '🔇';
+        soundLabel.textContent = soundEnabled ? 'Sound' : 'Muted';
+      });
+
+      // --- Minimalist Floating Petals & Celebration Burst Canvas ---
+      const canvas = document.getElementById('petalCanvas');
+      const ctx = canvas.getContext('2d');
+      let width = window.innerWidth;
+      let height = window.innerHeight;
+
+      function resizeCanvas() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      const petalColors = ['#f5b8cd', '#f7cad8', '#fadce6', '#e05385', '#f2a7c2'];
+      const particles = [];
+
+      function createAmbientPetal(randomY) {
+        return {
+          x: Math.random() * width,
+          y: randomY ? Math.random() * height : -20,
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: 0.45 + Math.random() * 0.75,
+          size: 5 + Math.random() * 6,
+          angle: Math.random() * Math.PI * 2,
+          spin: (Math.random() - 0.5) * 0.018,
+          color: petalColors[Math.floor(Math.random() * petalColors.length)],
+          type: Math.random() > 0.25 ? 'petal' : 'flower',
+          burst: false,
+          alpha: 0.45 + Math.random() * 0.35
+        };
+      }
+
+      for (let i = 0; i < 16; i++) {
+        particles.push(createAmbientPetal(true));
+      }
+
+      function spawnCelebrationBurst(count) {
+        for (let i = 0; i < count; i++) {
+          const angle = Math.random() * Math.PI * 2;
+          const speed = 1.8 + Math.random() * 5.2;
+          particles.push({
+            x: width / 2 + (Math.random() - 0.5) * 90,
+            y: height / 2 + (Math.random() - 0.5) * 40,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed - 2.0,
+            size: 6 + Math.random() * 7,
+            angle: Math.random() * Math.PI * 2,
+            spin: (Math.random() - 0.5) * 0.06,
+            color: petalColors[Math.floor(Math.random() * petalColors.length)],
+            type: i % 3 === 0 ? 'heart' : (i % 2 === 0 ? 'flower' : 'petal'),
+            burst: true,
+            alpha: 0.9
+          });
+        }
+      }
+
+      function drawPetalShape(p) {
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.angle);
+        ctx.globalAlpha = p.alpha;
+        ctx.fillStyle = p.color;
+
+        if (p.type === 'heart') {
+          const s = p.size * 0.075;
+          ctx.beginPath();
+          ctx.moveTo(0, 3 * s);
+          ctx.bezierCurveTo(0, 0, -5 * s, 0, -5 * s, 3 * s);
+          ctx.bezierCurveTo(-5 * s, 6 * s, 0, 8 * s, 0, 10 * s);
+          ctx.bezierCurveTo(0, 8 * s, 5 * s, 6 * s, 5 * s, 3 * s);
+          ctx.bezierCurveTo(5 * s, 0, 0, 0, 0, 3 * s);
+          ctx.fill();
+        } else if (p.type === 'flower') {
+          const r = p.size * 0.38;
+          for (let i = 0; i < 5; i++) {
+            const a = (i * Math.PI * 2) / 5;
+            ctx.beginPath();
+            ctx.arc(Math.cos(a) * r, Math.sin(a) * r, r * 0.68, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.fillStyle = '#fff5f8';
+          ctx.beginPath();
+          ctx.arc(0, 0, r * 0.45, 0, Math.PI * 2);
+          ctx.fill();
+        } else {
+          ctx.beginPath();
+          ctx.ellipse(0, 0, p.size * 0.72, p.size * 0.38, 0, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+
+      function animateCanvas() {
+        ctx.clearRect(0, 0, width, height);
+
+        for (let i = particles.length - 1; i >= 0; i--) {
+          const p = particles[i];
+          p.x += p.vx + Math.sin(p.angle) * 0.25;
+          p.y += p.vy;
+          p.angle += p.spin;
+
+          if (p.burst) {
+            p.vy += 0.1;
+            p.alpha -= 0.008;
+            if (p.alpha <= 0 || p.y > height + 40) {
+              particles.splice(i, 1);
+              continue;
+            }
+          } else {
+            if (p.y > height + 25) {
+              p.y = -20;
+              p.x = Math.random() * width;
+            }
+            if (p.x > width + 25) p.x = -20;
+            if (p.x < -25) p.x = width + 20;
+          }
+
+          drawPetalShape(p);
+        }
+
+        requestAnimationFrame(animateCanvas);
+      }
+
+      animateCanvas();
+    })();
+  </script>
 </body>
 </html>
